@@ -4,7 +4,7 @@ from func import *
 
 WIDTH, HEIGHT = 900, 600
 WIN = pygame.display.set_mode((WIDTH,HEIGHT))
-FPS = 30
+FPS = 60
 
 BLACK = (0,0,0)
 BLUE = (5, 23, 61)
@@ -18,7 +18,7 @@ bar_region = pygame.Rect(125, 100, WIDTH, HEIGHT)
 bar_region.width -= bar_region.left*2
 bar_region.height -= bar_region.top*1.75
 
-bar_length = 10
+bar_length = 20
 bar_range = (40, bar_region.height - bar_region.top)
 bar_data = rand_arr(bar_length, bar_range)
 bar_color = BLUE
@@ -72,6 +72,7 @@ while True:
         bar_data = stages[stage_index]
 
         if bar_data == stages[-1]:
+            pygame.time.delay(100)
             bar_color = GREEN
 
     pygame.display.update()
