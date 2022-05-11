@@ -14,9 +14,9 @@ def my_sort(arr, type): #Sorting is ascending by default
 
     if type == "bubble":
         for _ in range(len(arr)):
-            state.append(arr.copy())
-
             for i in range(len(arr)-1):
+                state.append(arr.copy())
+
                 if arr[i] > arr[i+1]:
                     arr[i], arr[i+1] = arr[i+1], arr[i]
     

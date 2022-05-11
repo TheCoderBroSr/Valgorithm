@@ -21,6 +21,7 @@ bar_length = 50
 bar_range = (40, bar_region.height - bar_region.top)
 bar_data = rand_arr(bar_length, bar_range)
 
+start_sorting = 0
 def draw_bars(arr, bar_region):
     gap = (bar_region.width)//len(arr)
     i = 0
@@ -35,6 +36,9 @@ def end():
     pygame.quit()
     sys.exit()
 
+stages = []
+stage_index = 0
+
 while True:
     clock.tick(FPS)
     for event in pygame.event.get():
@@ -42,17 +46,29 @@ while True:
             end()
 
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_q:
+            if event.key == pygame.K_q: #Quit
                 end()
 
-            if event.key == pygame.K_s:
-                for stage in my_sort(bar_data, 'bubble'):
-                    bar_data = stage
+            if event.key == pygame.K_s: #Initiate Sorting
+                start_sorting = 1
 
-            if event.key == pygame.K_r:
+            if event.key == pygame.K_r: #Generate new bars
+                start_sorting = 0
+                stage_index = 0
+                stages = []
+
                 bar_data = rand_arr(bar_length, bar_range)
 
     WIN.fill(BLACK)
     draw_bars(bar_data, bar_region)
+
+    if start_sorting:
+        stages = my_sort(bar_data, 'bubble')
+
+        if stage_index < len(stages) - 1:
+            stage_index += 1
+            pygame.time.delay(100)
+            
+        bar_data = stages[stage_index]
 
     pygame.display.update()
