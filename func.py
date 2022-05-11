@@ -1,6 +1,6 @@
 import random
 
-def rand_list(length, range):
+def rand_arr(length, range):
     data = []
     start, end = range
 
@@ -8,3 +8,16 @@ def rand_list(length, range):
         data.append(random.randint(start, end))
 
     return data
+
+def my_sort(arr, type): #Sorting is ascending by default
+    state = []
+
+    if type == "bubble":
+        for _ in range(len(arr)):
+            state.append(arr.copy())
+
+            for i in range(len(arr)-1):
+                if arr[i] > arr[i+1]:
+                    arr[i], arr[i+1] = arr[i+1], arr[i]
+    
+    return state
