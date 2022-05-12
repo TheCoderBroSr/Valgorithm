@@ -1,4 +1,4 @@
-import pygame, sys
+import pygame
 from func import *
 
 pygame.font.init()
@@ -26,21 +26,6 @@ bar_length = 30
 bar_range = (40, bar_region.height - bar_region.top)
 bar_data = rand_arr(bar_length, bar_range)
 bar_color = BLUE
-
-start_sorting = 0
-def draw_bars(arr, bar_region, color):
-    gap = (bar_region.width)//len(arr)
-    i = 0
-
-    for e in arr:
-        bar = pygame.Rect(bar_region.left + gap*i, bar_region.top, gap/1.5, e)
-        pygame.draw.rect(WIN, color, bar)        
-        i += 1
-
-def end():
-    pygame.display.quit()
-    pygame.quit()
-    sys.exit()
 
 stages = []
 stage_index = 0
@@ -73,7 +58,7 @@ while True:
     WIN.blit(title, ((WIDTH - title.get_width())//2, 20))
     WIN.blit(instruction, ((WIDTH - instruction.get_width())//2, HEIGHT - 40 - instruction.get_height()))
 
-    draw_bars(bar_data, bar_region, bar_color)
+    draw_bars(bar_data, bar_region, bar_color, WIN)
 
     if stages:
         if stage_index < len(stages)-1:
