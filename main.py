@@ -2,9 +2,14 @@ from matplotlib.pyplot import draw
 import pygame, sys
 from func import *
 
+pygame.font.init()
+
 WIDTH, HEIGHT = 900, 600
 WIN = pygame.display.set_mode((WIDTH,HEIGHT))
 FPS = 60
+
+TITLE = pygame.font.SysFont('cooper black', 80)
+PARA = pygame.font.SysFont('courier new', 40)
 
 BLACK = (0,0,0)
 BLUE = (5, 23, 61)
@@ -14,11 +19,11 @@ GREEN = (20, 150, 40)
 pygame.display.set_caption("VAlgorithm")
 clock = pygame.time.Clock()
 
-bar_region = pygame.Rect(125, 100, WIDTH, HEIGHT)
+bar_region = pygame.Rect(125, 125, WIDTH, HEIGHT)
 bar_region.width -= bar_region.left*2
 bar_region.height -= bar_region.top*1.75
 
-bar_length = 20
+bar_length = 30
 bar_range = (40, bar_region.height - bar_region.top)
 bar_data = rand_arr(bar_length, bar_range)
 bar_color = BLUE
@@ -40,6 +45,9 @@ def end():
 
 stages = []
 stage_index = 0
+
+title = TITLE.render('VAlgorithm', 1, WHITE)
+instruction = PARA.render('Press s to sort, r to reset bars', 1, WHITE)
 
 while True:
     clock.tick(FPS)
@@ -63,6 +71,9 @@ while True:
                 bar_color = BLUE
 
     WIN.fill(BLACK)
+    WIN.blit(title, ((WIDTH - title.get_width())//2, 20))
+    WIN.blit(instruction, ((WIDTH - instruction.get_width())//2, HEIGHT - 40 - instruction.get_height()))
+
     draw_bars(bar_data, bar_region, bar_color)
 
     if stages:
