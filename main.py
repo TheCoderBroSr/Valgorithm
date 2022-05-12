@@ -1,4 +1,3 @@
-from matplotlib.pyplot import draw
 import pygame, sys
 from func import *
 
